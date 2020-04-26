@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QMainWindow, QFileDialog, QTextEdit, QApplication, Q
 class Window(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.__data = None
 
         self.title = "Загрузка файла csv"
         self.top = 100
@@ -22,9 +23,9 @@ class Window(QMainWindow):
         self.button.setGeometry(100,100,200,50)
         self.button.clicked.connect(self.openFileDialog)
 
-      #  self.button = QPushButton("Cохраните файл", self)
-      # self.button.setGeometry(300, 100, 200, 50)
-      # self.button.clicked.connect(self.saveFileDialog)
+        self.button = QPushButton("Cохраните файл", self)
+        self.button.setGeometry(300, 100, 200, 50)
+        self.button.clicked.connect(self.saveFileDialog)
 
         self.setWindowIcon(QtGui.QIcon("icon.png"))
         self.setWindowTitle(self.title)
@@ -33,15 +34,18 @@ class Window(QMainWindow):
 
     def openFileDialog(self):
         filename = QFileDialog.getOpenFileName(self, 'Выберите файл', 'D:')
-
         if filename[0]:
             f = open(filename[0], 'r')
             with f:
-                data = f.read()
-                self.textedit.setText(data)
+                self.__data = f.read()
+                self.textedit.setText(self.__data)
 
-    #def saveFileDialog(self):
-     #   filename2 = QFileDialog.getSaveFileName(self, 'Сохраните файл', 'D:')
+    def saveFileDialog(self):
+        filename2 = QFileDialog.getSaveFileName(self, 'Сохраните файл', 'D:')
+        if filename2[0]:
+            f = open(filename2[0], 'w')
+            with f:
+                f.write(self.__data)
 
 App = QApplication(sys.argv)
 window = Window()
