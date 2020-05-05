@@ -11,7 +11,6 @@ class MyWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.__data = None
-        self.__data2 = None
 
         self.title = "Работа с файлом csv"
         self.top = 50
@@ -59,8 +58,8 @@ class MyWindow(QMainWindow):
             f = open(filename2[0], 'w', encoding='utf-8')
             with f:
                 f.write(self.__data)
-        self.__data2 = os.path.join(expanduser("~"), 'mydat.csv')
-        shutil.copyfile(filename2[0], self.__data2)
+        __mypath1 = os.path.join(expanduser("~"), 'mydat.csv')
+        shutil.copyfile(filename2[0], __mypath1)
 
     def PlotDiagram(self):
         __mypath = os.path.join(expanduser("~"), 'mydat.csv')
