@@ -1,8 +1,9 @@
+import sys
 import shutil
 import matplotlib.pyplot as plt
 import pandas as pd
 from PyQt5 import QtGui
-from PyQt5.QtWidgets import QMainWindow, QFileDialog, QTextEdit, QApplication, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QFileDialog, QTextEdit, QPushButton
 
 class MyWindow(QMainWindow):
     def __init__(self):
@@ -35,30 +36,30 @@ class MyWindow(QMainWindow):
 
         self.button = QPushButton("Выход", self)
         self.button.setGeometry(250, 400, 200, 50)
-        self.button.clicked.connect(self.MyExit)
+        self.button.clicked.connect(sys.exit)
 
         self.setWindowIcon(QtGui.QIcon("icon.png"))
         self.setWindowTitle(self.title)
         self.setGeometry(self.top,self.left,self.width,self.height)
 
     def openFileDialog(self):
-        filename = QFileDialog.getOpenFileName(self, 'Выберите файл', 'D:',"Файлы (* csv)")
+        filename = QFileDialog.getOpenFileName(self, 'Выберите файл csv', 'D:', filter='Файлы csv (*.csv)')
         if filename[0]:
-            f = open(filename[0], 'r')
+            f = open(filename[0], 'r', encoding='cp1251')
             with f:
                 self.__data = f.read()
                 self.textedit.setText(self.__data)
 
     def saveFileDialog(self):
-        filename2 = QFileDialog.getSaveFileName(self, 'Сохраните файл', 'D:', "Файлы (* csv)")
+        filename2 = QFileDialog.getSaveFileName(self, 'Сохраните файл', 'mydata.csv', 'CSV (* csv)')
         if filename2[0]:
-            f = open(filename2[0], 'w')
+            f = open(filename2[0], 'w', encoding='utf-8')
             with f:
                 f.write(self.__data)
-        shutil.copyfile(filename2[0], 'mydata.csv')
+        shutil.copyfile(filename2[0], 'mydat.csv')
 
     def PlotDiagram(self):
-        data = pd.read_csv('mydata.csv', sep=';', encoding='cp1251')
+        data = pd.read_csv('mydat.csv', sep=';', encoding='utf-8')
         data = data.sort_values(by='Статьи РИНЦ')[:20]
         cafedra = data.values[:, 0]
         article = data.values[:, 1]
@@ -67,7 +68,4 @@ class MyWindow(QMainWindow):
         plt.barh(cafedra, article)
         plt.title = "Топ 20 кафедр СибГМУ, издавающих статьи в РИНЦ (апрель 2020г.)"
         plt.show()
-
-    def MyExit(self):
-        exit(self)
 
