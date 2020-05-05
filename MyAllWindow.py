@@ -58,7 +58,7 @@ class MyWindow(QMainWindow):
             f = open(filename2[0], 'w', encoding='utf-8')
             with f:
                 f.write(self.__data)
-        self.__data2=os.path.join(expanduser("~"), 'mydat.csv')
+        self.__data2 = os.path.join(expanduser("~"), 'mydat.csv')
         shutil.copyfile(filename2[0], self.__data2)
 
     def PlotDiagram(self):
@@ -71,3 +71,4 @@ class MyWindow(QMainWindow):
         plt.barh(cafedra, article)
         plt.title = "Топ 20 кафедр СибГМУ, издавающих статьи в РИНЦ (апрель 2020г.)"
         plt.show()
+
