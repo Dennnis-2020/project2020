@@ -40,7 +40,7 @@ class MyWindow(QMainWindow):
 
         self.setWindowIcon(QtGui.QIcon("icon.png"))
         self.setWindowTitle(self.title)
-        self.setGeometry(self.top,self.left,self.width,self.height)
+        self.setFixedSize(500, 500)
 
     def openFileDialog(self):
         filename = QFileDialog.getOpenFileName(self, 'Выберите файл csv', 'D:', filter='Файлы csv (*.csv)')
