@@ -1,4 +1,6 @@
 import sys
+import os
+from os.path import expanduser
 import shutil
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -43,7 +45,7 @@ class MyWindow(QMainWindow):
         self.setFixedSize(500, 500)
 
     def openFileDialog(self):
-        filename = QFileDialog.getOpenFileName(self, 'Выберите файл csv', 'D:', filter='Файлы csv (*.csv)')
+        filename = QFileDialog.getOpenFileName(self, 'Выберите файл csv', expanduser("~"), filter='Файлы csv (*.csv)')
         if filename[0]:
             f = open(filename[0], 'r', encoding='cp1251')
             with f:
@@ -51,15 +53,16 @@ class MyWindow(QMainWindow):
                 self.textedit.setText(self.__data)
 
     def saveFileDialog(self):
-        filename2 = QFileDialog.getSaveFileName(self, 'Сохраните файл', 'mydata.csv', 'CSV (* csv)')
+        filename2 = QFileDialog.getSaveFileName(self, 'Сохраните файл', 'mydata.csv', 'Файлы csv (*.csv)')
         if filename2[0]:
             f = open(filename2[0], 'w', encoding='utf-8')
             with f:
                 f.write(self.__data)
-        shutil.copyfile(filename2[0], 'mydat.csv')
+        self.__data2=os.path.join(expanduser("~"), 'mydat.csv')
+        shutil.copyfile(filename2[0], self.__data2)
 
     def PlotDiagram(self):
-        data = pd.read_csv('mydat.csv', sep=';', encoding='utf-8')
+        data = pd.read_csv(self.__data2, sep=';', encoding='utf-8')
         data = data.sort_values(by='Статьи РИНЦ')[:20]
         cafedra = data.values[:, 0]
         article = data.values[:, 1]
@@ -68,4 +71,3 @@ class MyWindow(QMainWindow):
         plt.barh(cafedra, article)
         plt.title = "Топ 20 кафедр СибГМУ, издавающих статьи в РИНЦ (апрель 2020г.)"
         plt.show()
-
