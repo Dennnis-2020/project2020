@@ -63,7 +63,8 @@ class MyWindow(QMainWindow):
         shutil.copyfile(filename2[0], self.__data2)
 
     def PlotDiagram(self):
-        data = pd.read_csv(self.__data2, sep=';', encoding='utf-8')
+        __mypath = os.path.join(expanduser("~"), 'mydat.csv')
+        data = pd.read_csv(__mypath, sep=';', encoding='utf-8')
         data = data.sort_values(by='Статьи РИНЦ')[:20]
         cafedra = data.values[:, 0]
         article = data.values[:, 1]
