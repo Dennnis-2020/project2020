@@ -11,6 +11,7 @@ class MyWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.__data = None
+        self.__data2 = None
 
         self.title = "Работа с файлом csv"
         self.top = 50
