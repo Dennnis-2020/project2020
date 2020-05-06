@@ -3,6 +3,7 @@ import os
 from os.path import expanduser
 import shutil
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QMainWindow, QFileDialog, QTextEdit, QWidget, QPushButton, QApplication, QMainWindow, QTableWidgetItem
@@ -73,8 +74,9 @@ class MyWindow(QMainWindow):
 
         plt.figure(figsize=(10, 5))
         plt.barh(cafedra, article)
-        plt.title("Топ 20 кафедр СибГМУ, издавающих статьи в РИНЦ (апрель 2020г.) по кол-ву статей")
+        plt.title("Топ 20 кафедр СибГМУ, по кол-ву статей в РИНЦ")
         plt.xlabel('Статьи')
+        plt.subplots_adjust(left=0.52, right=None)
         plt.show()
 
     def PlotDiagramCit(self):
@@ -86,8 +88,9 @@ class MyWindow(QMainWindow):
 
         plt.figure(figsize=(10, 5))
         plt.barh(cafedra, citation)
-        plt.title("Топ 20 кафедр СибГМУ, издавающих статьи в РИНЦ (апрель 2020г.) по цитированиям")
+        plt.title("Топ 20 кафедр СибГМУ по цитированию в РИНЦ")
         plt.xlabel('Цитирования')
+        plt.subplots_adjust(left=0.52, right=None)
         plt.show()
 
 class MyWidget(QWidget):
