@@ -73,8 +73,7 @@ class MyWindow(QMainWindow):
 
         plt.figure(figsize=(10, 5))
         plt.barh(cafedra, article)
-        plt.title("Топ 20 кафедр СибГМУ, издавающих статьи в РИНЦ (апрель 2020г.) по кол-ву статей")
-        plt.xlabel('Статьи')
+        plt.title = "Топ 20 кафедр СибГМУ, издавающих статьи в РИНЦ (апрель 2020г.) по кол-ву статей"
         plt.show()
 
     def PlotDiagramCit(self):
@@ -86,8 +85,7 @@ class MyWindow(QMainWindow):
 
         plt.figure(figsize=(10, 5))
         plt.barh(cafedra, citation)
-        plt.title("Топ 20 кафедр СибГМУ, издавающих статьи в РИНЦ (апрель 2020г.) по цитированиям")
-        plt.xlabel('Цитирования')
+        plt.title = "Топ 20 кафедр СибГМУ, издавающих статьи в РИНЦ (апрель 2020г.) по цитирования"
         plt.show()
 
 class MyWidget(QWidget):
