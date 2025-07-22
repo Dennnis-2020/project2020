@@ -33,12 +33,10 @@
 >[!NOTE]
 >текст примечания
 
->[!TIP]
+>[!FAILURE]
 >текст совета
 
 >[!WARNING]
 >текст предупреждения
 
-> [!NOTE]
-> I want the readers to read it carefully as it contains many important docs.
 
